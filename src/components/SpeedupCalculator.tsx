@@ -14,15 +14,6 @@ function SpeedupCalculator() {
   const [total, setTotal] = useState(0);
   const [totals, setTotals] = useState<number[]>([]);
 
-  const calculateTotal = useCallback((values: number[]) => {
-    let newTotal = 0;
-    values.map((value, index) => {
-      newTotal += value * interval[index].minutes;
-    });
-    calculateSpeedupAmounts(newTotal);
-    setTotal(newTotal);
-  }, []);
-
   const calculateSpeedupAmounts = useCallback((newTotal: number) => {
     const amounts: number[] = [];
     let remainingTotal = newTotal;
@@ -42,6 +33,18 @@ function SpeedupCalculator() {
 
     setTotals(amounts);
   }, []);
+
+  const calculateTotal = useCallback(
+    (values: number[]) => {
+      let newTotal = 0;
+      values.map((value, index) => {
+        newTotal += value * interval[index].minutes;
+      });
+      calculateSpeedupAmounts(newTotal);
+      setTotal(newTotal);
+    },
+    [calculateSpeedupAmounts]
+  );
 
   return (
     <Box maxWidth="80vw" margin="auto">

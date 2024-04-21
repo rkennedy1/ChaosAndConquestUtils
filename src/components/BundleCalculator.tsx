@@ -1,6 +1,6 @@
 // BundleCalculator.tsx
 import { useCallback, useState } from "react";
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Calculator from "./Calculator";
 import speedupIntervals from "../data/speedupIntervals.json";
 
