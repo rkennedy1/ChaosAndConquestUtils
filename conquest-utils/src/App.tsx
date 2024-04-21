@@ -1,34 +1,69 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+// App.js
+import React, { SyntheticEvent } from "react";
+import { Box, Tab, Tabs } from "@mui/material";
+import BundleCalculator from "./components/BundleCalculator";
 
-function App() {
-  const [count, setCount] = useState(0);
+type TabPanelProps = {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+};
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
+}
+
+function Navigation() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (
+    _e: SyntheticEvent<Element, Event>,
+    newValue: number
+  ) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          <Tab label="Bundle Calculator" />
+          <Tab label="Troop Calculator" />
+          {/* Add more tabs as needed */}
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+        <BundleCalculator />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        {/* Add your troop calculator code here */}
+      </TabPanel>
+      {/* Add more TabPanels for additional tabs */}
+    </Box>
+  );
+}
+
+function App() {
+  return (
+    <div className="App">
+      <Navigation />
+    </div>
   );
 }
 
