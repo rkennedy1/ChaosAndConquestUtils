@@ -1,7 +1,10 @@
 // App.js
 import React, { SyntheticEvent } from "react";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, IconButton, Tab, Tabs } from "@mui/material";
 import BundleCalculator from "./components/BundleCalculator";
+import { GitHub } from "@mui/icons-material";
+import TroopCalculator from "./components/TroopCalculator";
+import SpeedupCalculator from "./components/SpeedupCalculator";
 
 type TabPanelProps = {
   children?: React.ReactNode;
@@ -45,25 +48,46 @@ function Navigation() {
         >
           <Tab label="Bundle Calculator" />
           <Tab label="Troop Calculator" />
-          {/* Add more tabs as needed */}
+          <Tab label="Speedup Calculator" />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
         <BundleCalculator />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {/* Add your troop calculator code here */}
+        <TroopCalculator />
       </TabPanel>
-      {/* Add more TabPanels for additional tabs */}
+      <TabPanel value={value} index={2}>
+        <SpeedupCalculator />
+      </TabPanel>
     </Box>
   );
 }
 
 function App() {
   return (
-    <div className="App">
+    <Box
+      display="flex"
+      flexDirection="column"
+      minHeight="100vh"
+      alignItems="center"
+      justifyContent="space-between"
+    >
       <Navigation />
-    </div>
+      <IconButton
+        aria-label="github repository"
+        sx={{ marginBottom: "1rem" }}
+        component="span"
+        onClick={() =>
+          window.open(
+            "https://github.com/rkennedy1/ChaosAndConquestUtils",
+            "_blank"
+          )
+        }
+      >
+        <GitHub />
+      </IconButton>
+    </Box>
   );
 }
 
