@@ -2,7 +2,7 @@
 import { useCallback, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import Calculator from "./Calculator";
-import speedupIntervals from "../data/speedupIntervals.json";
+import speedupIntervals from "../../data/speedupIntervals.json";
 
 const interval = [
   { label: "Days", minutes: 1440 },
