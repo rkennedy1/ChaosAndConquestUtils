@@ -36,7 +36,14 @@ function TroopCalculator() {
 
   return (
     <Box maxWidth="80vw" margin="auto">
-      <Calculator intervals={tierIntervals} calculateTotal={calculateTotal} />
+      <Calculator
+        intervals={tierIntervals}
+        calculateTotal={calculateTotal}
+        onClear={() => {
+          setTotal(0);
+          setTotals([]);
+        }}
+      />
       <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
         <Grid item xs={6} md={3}>
           <Typography variant="h5" align="center">

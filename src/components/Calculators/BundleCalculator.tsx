@@ -19,10 +19,11 @@ function BundleCalculator() {
       <Calculator
         intervals={speedupIntervals}
         calculateTotal={calculateTotal}
+        onClear={() => setTotal(0)}
       />
       <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
         <Grid item xs={6} md={3}>
-          <Typography variant="h5" align="center">
+          <Typography variant="h5" align="center" id="totalTime">
             Total Time
           </Typography>
         </Grid>
@@ -30,16 +31,19 @@ function BundleCalculator() {
           <Typography
             variant="body1"
             align="center"
+            id="totalMinutes"
           >{`Minutes: ${total}`}</Typography>
         </Grid>
         <Grid item xs={6} md={3}>
-          <Typography variant="body1" align="center">{`Hours: ${
-            total / 60
+          <Typography variant="body1" align="center" id="totalHours">{`Hours: ${
+            total % 60 == 0 ? total / 60 : (total / 60).toFixed(2)
           }`}</Typography>
         </Grid>
         <Grid item xs={6} md={3}>
-          <Typography variant="body1" align="center">{`Days: ${
-            total / 60 / 24
+          <Typography variant="body1" align="center" id="totalDays">{`Days: ${
+            total % (60 * 24) == 0
+              ? total / 60 / 24
+              : (total / 60 / 24).toFixed(2)
           }`}</Typography>
         </Grid>
       </Grid>

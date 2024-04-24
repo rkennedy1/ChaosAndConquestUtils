@@ -5,9 +5,14 @@ import { Grid, TextField, Button, Box } from "@mui/material";
 type CalculatorProps = {
   intervals: { label: string }[];
   calculateTotal: (values: number[]) => void;
+  onClear: () => void;
 };
 
-const Calculator = ({ intervals, calculateTotal }: CalculatorProps) => {
+const Calculator = ({
+  intervals,
+  calculateTotal,
+  onClear,
+}: CalculatorProps) => {
   const [values, setValues] = useState(Array(intervals.length).fill(0));
 
   const handleChange = useCallback(
@@ -21,10 +26,11 @@ const Calculator = ({ intervals, calculateTotal }: CalculatorProps) => {
 
   const clearValues = useCallback(() => {
     setValues(Array(intervals.length).fill(0));
-  }, [intervals.length]);
+    onClear();
+  }, [intervals.length, onClear]);
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} id="calculator">
       {intervals.map((interval, index) => (
         <Grid item xs={6} sm={4} md={3} key={index}>
           <TextField
@@ -41,6 +47,7 @@ const Calculator = ({ intervals, calculateTotal }: CalculatorProps) => {
               min: 0,
               step: 1,
             }}
+            id={`calcField${index}`}
           />
         </Grid>
       ))}
@@ -50,6 +57,7 @@ const Calculator = ({ intervals, calculateTotal }: CalculatorProps) => {
             variant="contained"
             onClick={() => calculateTotal(values)}
             fullWidth
+            id="calculateButton"
           >
             Calculate
           </Button>
@@ -57,7 +65,12 @@ const Calculator = ({ intervals, calculateTotal }: CalculatorProps) => {
       </Grid>
       <Grid item xs={6} sm={4} md={3}>
         <Box width={1} height={1}>
-          <Button variant="contained" onClick={clearValues} fullWidth>
+          <Button
+            variant="contained"
+            onClick={clearValues}
+            fullWidth
+            id="clearButton"
+          >
             Clear
           </Button>
         </Box>

@@ -1,6 +1,13 @@
 //TroopCalculator.tsx
 import { useCallback, useState } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Calculator from "./Calculator";
 import speedupIntervals from "../../data/speedupIntervals.json";
 
@@ -13,26 +20,43 @@ const interval = [
 function SpeedupCalculator() {
   const [total, setTotal] = useState(0);
   const [totals, setTotals] = useState<number[]>([]);
+  const [remainingTotal, setRemainingTotal] = useState(0);
+  const [showSpeedups, setShowSpeedups] = useState(false);
+  const [speedups, setSpeedups] = useState(
+    Array(speedupIntervals.length).fill(0)
+  );
 
-  const calculateSpeedupAmounts = useCallback((newTotal: number) => {
-    const amounts: number[] = [];
-    let remainingTotal = newTotal;
+  const calculateSpeedupAmounts = useCallback(
+    (newTotal: number) => {
+      if (speedups.length !== speedupIntervals.length) {
+        throw new Error(
+          "Speedups array and speedup types array must have the same length"
+        );
+      }
+      const amounts: number[] = [];
+      let currentRemainingTotal = newTotal;
+      for (let i = 0; i < speedupIntervals.length; i++) {
+        const speedMinutes = speedupIntervals[i].minutes;
 
-    // Iterate through the speed intervals in reverse order
-    for (let i = 0; i < speedupIntervals.length; i++) {
-      const speedMinutes = speedupIntervals[i].minutes;
-
-      // Calculate the amount of this speed up to use
-      const amount = Math.floor(remainingTotal / speedMinutes);
-      amounts.push(amount);
-      console.log(amount);
-
-      // Update the remaining total
-      remainingTotal -= amount * speedMinutes;
-    }
-
-    setTotals(amounts);
-  }, []);
+        const amount = Math.floor(currentRemainingTotal / speedMinutes);
+        if (amount === 0) {
+          amounts.push(0);
+          continue;
+        }
+        if (showSpeedups) {
+          const speedupAmount = Math.min(amount, speedups[i]);
+          amounts.push(speedupAmount);
+          currentRemainingTotal -= speedupAmount * speedMinutes;
+        } else {
+          amounts.push(amount);
+          currentRemainingTotal -= amount * speedMinutes;
+        }
+      }
+      setRemainingTotal(currentRemainingTotal);
+      setTotals(amounts);
+    },
+    [showSpeedups, speedups]
+  );
 
   const calculateTotal = useCallback(
     (values: number[]) => {
@@ -46,15 +70,67 @@ function SpeedupCalculator() {
     [calculateSpeedupAmounts]
   );
 
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setShowSpeedups(event.target.checked);
+  };
+
+  const handleSpeedupChange =
+    (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newSpeedups = [...speedups];
+      newSpeedups[index] = Number(event.target.value);
+      setSpeedups(newSpeedups);
+    };
+
   return (
     <Box maxWidth="80vw" margin="auto">
-      <Calculator intervals={interval} calculateTotal={calculateTotal} />
+      <Calculator
+        intervals={interval}
+        calculateTotal={calculateTotal}
+        onClear={() => {
+          setTotal(0);
+          setTotals([]);
+        }}
+      />
       <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
-        <Grid item xs={6} md={3}>
+        <Grid item xs={6}>
           <Typography variant="h5" align="center">
             Total hours: {total}
           </Typography>
         </Grid>
+        <Grid item xs={6}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={showSpeedups}
+                onChange={handleCheckboxChange}
+              />
+            }
+            label="I have speedups"
+          />
+        </Grid>
+        {showSpeedups && (
+          <Grid container spacing={2}>
+            {speedupIntervals.map((type, index) => (
+              <Grid item xs={6} sm={4} md={3} key={index}>
+                <TextField
+                  fullWidth
+                  label={type.label}
+                  type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="standard"
+                  value={speedups[index]}
+                  onChange={handleSpeedupChange(index)}
+                  inputProps={{
+                    min: 0,
+                    step: 1,
+                  }}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
         {totals.map((total, index) => (
           <Grid item xs={6} sm={4} md={2} key={index}>
             <Typography
@@ -63,6 +139,13 @@ function SpeedupCalculator() {
             >{`${speedupIntervals[index].label}: ${total}`}</Typography>
           </Grid>
         ))}
+        {remainingTotal > 0 && (
+          <Grid item xs={6}>
+            <Typography variant="h5" align="center">
+              Remaining: {remainingTotal} minutes
+            </Typography>
+          </Grid>
+        )}
       </Grid>
     </Box>
   );

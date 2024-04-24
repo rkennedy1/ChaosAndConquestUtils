@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "cypress/components/Footer.cy.tsx", "cypress/components/Navigation.cy.tsx", "cypress/components/TabPanel.cy.tsx", "cypress/components/Calculators/BundleCalculator.cy.tsx", "cypress/components/Calculators/Calculator.cy.tsx", "cypress/components/Calculators/SpeedupCalculator.cy.tsx", "cypress/components/Calculators/TroopCalculator.cy.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
