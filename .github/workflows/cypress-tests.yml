@@ -16,8 +16,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: yarn install
+
       - name: Cypress run
         uses: ./
         with:
-          working-directory: examples/component-tests
+          working-directory: cypress/components
           component: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
