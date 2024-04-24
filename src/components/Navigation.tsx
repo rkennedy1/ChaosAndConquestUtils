@@ -24,9 +24,12 @@ function Navigation() {
           aria-label="basic tabs example"
           scrollButtons="auto"
         >
-          <Tab label="Bundle Calculator" />
-          <Tab label="Troop Calculator" />
-          <Tab label="Speedup Calculator" />
+          <Tab data-testid="bundle-calculator-tab" label="Bundle Calculator" />
+          <Tab data-testid="troop-calculator-tab" label="Troop Calculator" />
+          <Tab
+            data-testid="speedup-calculator-tab"
+            label="Speedup Calculator"
+          />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

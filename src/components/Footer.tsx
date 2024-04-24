@@ -13,6 +13,7 @@ function Footer() {
           "_blank"
         )
       }
+      id="githubButton"
     >
       <GitHub />
     </IconButton>

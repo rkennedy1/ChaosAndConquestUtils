@@ -45,6 +45,3 @@ export const waitForPageLoad = () => {
   );
 };
 
-export const invokeAndAssert = (selector: string, input: string) => {
-   ;
-  };

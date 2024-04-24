@@ -35,7 +35,7 @@ function TroopCalculator() {
   }, []);
 
   return (
-    <Box maxWidth="80vw" margin="auto">
+    <Box maxWidth="80vw" margin="auto" id="troopCalculator">
       <Calculator
         intervals={tierIntervals}
         calculateTotal={calculateTotal}
@@ -46,7 +46,7 @@ function TroopCalculator() {
       />
       <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
         <Grid item xs={6} md={3}>
-          <Typography variant="h5" align="center">
+          <Typography variant="h5" align="center" id="totalPower">
             Total Power: {total}
           </Typography>
         </Grid>
@@ -55,6 +55,7 @@ function TroopCalculator() {
             <Typography
               variant="body1"
               align="center"
+              id={`totalPower${index}`}
             >{`${tierIntervals[index].label}: ${total}`}</Typography>
           </Grid>
         ))}

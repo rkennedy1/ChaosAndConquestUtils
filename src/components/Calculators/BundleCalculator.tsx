@@ -15,7 +15,7 @@ function BundleCalculator() {
   }, []);
 
   return (
-    <Box maxWidth="80vw" margin="auto">
+    <Box maxWidth="80vw" margin="auto" id="bundleCalculator">
       <Calculator
         intervals={speedupIntervals}
         calculateTotal={calculateTotal}

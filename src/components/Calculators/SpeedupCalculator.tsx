@@ -82,7 +82,7 @@ function SpeedupCalculator() {
     };
 
   return (
-    <Box maxWidth="80vw" margin="auto">
+    <Box maxWidth="80vw" margin="auto" id="speedupCalculator">
       <Calculator
         intervals={interval}
         calculateTotal={calculateTotal}
@@ -93,8 +93,8 @@ function SpeedupCalculator() {
       />
       <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
         <Grid item xs={6}>
-          <Typography variant="h5" align="center">
-            Total hours: {total}
+          <Typography variant="h5" align="center" id="totalMinutes">
+            Total minutes: {total}
           </Typography>
         </Grid>
         <Grid item xs={6}>
@@ -103,6 +103,7 @@ function SpeedupCalculator() {
               <Checkbox
                 checked={showSpeedups}
                 onChange={handleCheckboxChange}
+                id="speedupCheckbox"
               />
             }
             label="I have speedups"
@@ -126,6 +127,7 @@ function SpeedupCalculator() {
                     min: 0,
                     step: 1,
                   }}
+                  id={`speedupField${index}`}
                 />
               </Grid>
             ))}
@@ -141,7 +143,7 @@ function SpeedupCalculator() {
         ))}
         {remainingTotal > 0 && (
           <Grid item xs={6}>
-            <Typography variant="h5" align="center">
+            <Typography variant="h5" align="center" id="remainingTotal">
               Remaining: {remainingTotal} minutes
             </Typography>
           </Grid>
