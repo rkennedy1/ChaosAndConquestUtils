@@ -1,6 +1,5 @@
 import React from "react";
 import TroopCalculator from "../../../src/components/Calculators/TroopCalculator";
-import { searchById } from "../../support/utils";
 import TroopCalculatorPage from "../../models/Calculators/TroopCalculatorPage";
 
 describe("<TroopCalculator />", () => {

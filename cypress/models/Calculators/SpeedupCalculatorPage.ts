@@ -20,7 +20,7 @@ class SpeedupCalculatorPage extends CalculatorPage {
   }
 
   public inputSpeedupFields(length: number, value: string) {
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i <= length; i++) {
       cy.get(`input[id="speedupField${i}"]`).type(value);
     }
   }

@@ -17,8 +17,9 @@ describe("verify persisted data", () => {
     navigationPage.verifyBundleCalculatorContent();
 
     bundleCalculatorPage.inputFields(10, "1");
+    bundleCalculatorPage.inputPriceField("10");
     bundleCalculatorPage.clickCalculateButton();
-    bundleCalculatorPage.verifyOutput("50598", "843.30", "35.14");
+    bundleCalculatorPage.verifyOutput(50598, 10);
 
     navigationPage.clickTroopCalculatorTab();
     navigationPage.verifyTroopCalculatorContent();
@@ -39,7 +40,7 @@ describe("verify persisted data", () => {
 
     speedupCalculatorPage.inputTimeFields(1, 1, 49099);
     speedupCalculatorPage.clickSpeedupCheckbox();
-    speedupCalculatorPage.inputSpeedupFields(10, "1");
+    speedupCalculatorPage.inputSpeedupFields(9, "1");
     speedupCalculatorPage.clickCalculateButton();
     speedupCalculatorPage.verifyOutput("50599", "1");
   });
