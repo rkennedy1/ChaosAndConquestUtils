@@ -1,3 +1,4 @@
+import React from "react";
 import Calculator from "../../../src/components/Calculators/Calculator";
 import CalculatorPage from "../../models/Calculators/CalculatorPage";
 

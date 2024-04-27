@@ -1,3 +1,4 @@
+import React from "react";
 import SpeedupCalculator from "../../../src/components/Calculators/SpeedupCalculator";
 import SpeedupCalculatorPage from "../../models/Calculators/SpeedupCalculatorPage";
 
@@ -9,7 +10,7 @@ describe("<SpeedupCalculator />", () => {
     cy.mount(<SpeedupCalculator />);
     speedupCalculatorPage.inputTimeFields(1, 1, 49099);
     speedupCalculatorPage.clickSpeedupCheckbox();
-    speedupCalculatorPage.inputSpeedupFields(10, "1");
+    speedupCalculatorPage.inputSpeedupFields(9, "1");
     speedupCalculatorPage.clickCalculateButton();
     speedupCalculatorPage.verifyOutput("50599", "1");
     speedupCalculatorPage.clickClearButton();
