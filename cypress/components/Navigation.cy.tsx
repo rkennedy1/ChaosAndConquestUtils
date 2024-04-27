@@ -1,5 +1,6 @@
 import Navigation from "../../src/components/Navigation";
 import { searchById } from "../support/utils";
+import NavigationPage from "../models/NavigationPage";
 
 describe("<Navigation />", () => {
   beforeEach(() => {
@@ -7,21 +8,19 @@ describe("<Navigation />", () => {
   });
 
   it("renders all tabs", () => {
-    cy.get("[data-testid=bundle-calculator-tab]").should("be.visible");
-    cy.get("[data-testid=troop-calculator-tab]").should("be.visible");
-    cy.get("[data-testid=speedup-calculator-tab]").should("be.visible");
+    const navigationPage = new NavigationPage();
+    navigationPage.verifyTabsExist();
   });
 
   it("changes content on tab click", () => {
-    // replace 'BundleCalculator content' with actual content or a part of it
-    cy.get(searchById("bundleCalculator")).should("be.visible");
+    const navigationPage = new NavigationPage();
 
-    cy.get("[data-testid=troop-calculator-tab]").click();
-    // replace 'TroopCalculator content' with actual content or a part of it
-    cy.get(searchById("troopCalculator")).should("be.visible");
+    navigationPage.verifyBundleCalculatorContent();
 
-    cy.get("[data-testid=speedup-calculator-tab]").click();
-    // replace 'SpeedupCalculator content' with actual content or a part of it
-    cy.get(searchById("speedupCalculator")).should("be.visible");
+    navigationPage.clickTroopCalculatorTab();
+    navigationPage.verifyTroopCalculatorContent();
+
+    navigationPage.clickSpeedupCalculatorTab();
+    navigationPage.verifySpeedupCalculatorContent();
   });
 });

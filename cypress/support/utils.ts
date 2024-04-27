@@ -40,8 +40,7 @@ export const getRandomNumber = (max: number): number =>
   Math.floor(Math.random() * Math.floor(max));
 
 export const waitForPageLoad = () => {
-  cy.get(searchContainsId("shackScheduleItem"), { timeout: 10000 }).should(
+  cy.get(searchContainsId("bundleCalculator"), { timeout: 10000 }).should(
     "be.visible"
   );
 };
-

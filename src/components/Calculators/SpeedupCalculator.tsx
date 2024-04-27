@@ -89,6 +89,8 @@ function SpeedupCalculator() {
         onClear={() => {
           setTotal(0);
           setTotals([]);
+          setRemainingTotal(0);
+          setSpeedups(Array(speedupIntervals.length).fill(0));
         }}
       />
       <Grid container spacing={2} justifyContent="center" sx={{ mt: 2 }}>
