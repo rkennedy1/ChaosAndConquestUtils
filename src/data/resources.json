@@ -1,0 +1,67 @@
+{
+  "id": "3",
+  "type": "resources",
+  "label": "Total Resources",
+  "labels": [
+    { "id": "1", "label": "Food", "value": 1, "unit": "rss" },
+    { "id": "2", "label": "Wood", "value": 1, "unit": "rss" },
+    { "id": "3", "label": "Stone", "value": 1, "unit": "rss" },
+    { "id": "4", "label": "Lead", "value": 1, "unit": "rss" },
+    { "id": "5", "label": "Iron", "value": 1, "unit": "rss" }
+  ]
+}
+{
+  "type": "resources",
+  "values": [
+    {
+      "label": "Food",
+      "values": [
+        { "value": 30000 },
+        { "value": 150000 },
+        { "value": 500000 },
+        { "value": 2000000 },
+        { "value": 6000000 }
+      ]
+    },
+    {
+      "label": "Wood",
+      "values": [
+        { "value": 30000 },
+        { "value": 150000 },
+        { "value": 500000 },
+        { "value": 2000000 },
+        { "value": 6000000 }
+      ]
+    },
+    {
+      "label": "Stone",
+      "values": [
+        { "value": 30000 },
+        { "value": 150000 },
+        { "value": 500000 },
+        { "value": 2000000 },
+        { "value": 6000000 }
+      ]
+    },
+    {
+      "label": "Lead",
+      "values": [
+        { "value": 30000 },
+        { "value": 150000 },
+        { "value": 500000 },
+        { "value": 2000000 },
+        { "value": 6000000 }
+      ]
+    },
+    {
+      "label": "Iron",
+      "values": [
+        { "value": 3000 },
+        { "value": 15000 },
+        { "value": 50000 },
+        { "value": 200000 },
+        { "value": 600000 }
+      ]
+    }
+  ]
+},

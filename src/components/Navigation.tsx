@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from "react";
 import { Box, Tabs, Tab } from "@mui/material";
 import TabPanel from "./TabPanel";
-import BundleCalculator from "./Calculators/BundleCalculator";
+import BundleCalculator from "./Calculators/BundleCalculator/BundleCalculator";
 import TroopCalculator from "./Calculators/TroopCalculator";
 import SpeedupCalculator from "./Calculators/SpeedupCalculator";
 

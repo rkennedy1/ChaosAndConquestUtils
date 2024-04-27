@@ -19,7 +19,7 @@ describe("verify persisted data", () => {
     bundleCalculatorPage.inputFields(10, "1");
     bundleCalculatorPage.inputPriceField("10");
     bundleCalculatorPage.clickCalculateButton();
-    bundleCalculatorPage.verifyOutput(50598, 10);
+    bundleCalculatorPage.verifyOutput(50598, 10, "speedups");
 
     navigationPage.clickTroopCalculatorTab();
     navigationPage.verifyTroopCalculatorContent();
