@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "type": "troops",
+    "label": "Total Power",
+    "labels": [{ "id": "1", "label": "Power", "value": 1, "unit": "power" }]
+  },
+  {
+    "id": "2",
+    "type": "speedups",
+    "label": "Total Time",
+    "labels": [
+      { "id": "1", "label": "minutes", "value": 1, "unit": "mins" },
+      { "id": "2", "label": "hours", "value": 60, "unit": "hrs" },
+      { "id": "3", "label": "days", "value": 1440, "unit": "days" }
+    ]
+  },
+  {
+    "id": "3",
+    "type": "stamina",
+    "label": "Total Stamina",
+    "labels": [{ "id": "1", "label": "Stamina", "value": 1, "unit": "stamina" }]
+  }
+]

@@ -1,5 +1,6 @@
 import { searchById } from "../../support/utils";
 import CalculatorPage from "./CalculatorPage";
+import BundleCalculatorOutput from "../Calculators/BundleCalculatorOutput";
 
 class BundleCalculatorPage extends CalculatorPage {
   public calculateTime(total: number, divisor: number) {
@@ -15,29 +16,17 @@ class BundleCalculatorPage extends CalculatorPage {
     cy.get(searchById("bundleCost")).should("have.value", "0");
   }
 
-  public inputPriceField(price: string) {
-    cy.get(searchById("bundleCost")).type(price);
+  public inputPriceField(price: number) {
+    cy.get(searchById("bundleCost")).type(price.toString());
   }
-  public verifyOutput(totalMinutes: number, price: number) {
-    cy.get(searchById("totalMinutes")).contains(totalMinutes);
-    cy.get(searchById("totalHours")).contains(
-      this.calculateTime(totalMinutes, 60)
-    );
-    cy.get(searchById("totalDays")).contains(
-      this.calculateTime(totalMinutes, 60 * 24)
-    );
-    cy.get(searchById("bundleCost")).should("contain.value", price);
-    if (price > 0) {
-      cy.get(searchById("minutesPerDollar")).contains(
-        `${this.calculateTime(totalMinutes, price)} mins/$`
-      );
-      cy.get(searchById("hoursPerDollar")).contains(
-        `${this.calculateTime(totalMinutes, 60 * price)} hours/$`
-      );
-      cy.get(searchById("daysPerDollar")).contains(
-        `${this.calculateTime(totalMinutes, 60 * 24 * price)} days/$`
-      );
-    }
+  public verifyOutput(value: number, price: number, type: string = "speedups") {
+    const bundleCalculatorOutput = new BundleCalculatorOutput(type, value);
+    bundleCalculatorOutput.verifyTotal(price);
+  }
+
+  public selectType(type: string) {
+    cy.get(searchById("selectType")).click();
+    cy.get(searchById(type)).click();
   }
 }
 

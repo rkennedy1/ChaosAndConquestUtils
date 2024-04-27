@@ -1,17 +1,21 @@
 // Calculator.tsx
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Grid, TextField, Button, Box } from "@mui/material";
 
 type CalculatorProps = {
   intervals: { label: string }[];
   calculateTotal: (values: number[]) => void;
   onClear: () => void;
+  triggerClear?: boolean;
+  setTriggerClear?: (value: boolean) => void;
 };
 
 const Calculator = ({
   intervals,
   calculateTotal,
   onClear,
+  triggerClear = false,
+  setTriggerClear,
 }: CalculatorProps) => {
   const [values, setValues] = useState(Array(intervals.length).fill(0));
 
@@ -28,6 +32,13 @@ const Calculator = ({
     setValues(Array(intervals.length).fill(0));
     onClear();
   }, [intervals.length, onClear]);
+
+  useEffect(() => {
+    if (triggerClear) {
+      clearValues();
+      setTriggerClear?.(false);
+    }
+  });
 
   return (
     <Grid container spacing={2} id="calculator">
