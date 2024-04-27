@@ -1,34 +1,26 @@
 // BundleCalculator.spec.js
 import BundleCalculator from "../../../src/components/Calculators/BundleCalculator";
 import { searchContainsId } from "../../support/utils";
+import BundleCalculatorPage from "../../models/Calculators/BundleCalculatorPage";
 
 describe("BundleCalculator", () => {
+  const bundleCalculatorPage = new BundleCalculatorPage();
   it("calculates correctly", () => {
     cy.mount(<BundleCalculator />);
 
     // Fill in the input fields
-    for (let i = 0; i <= 9; i++) {
-      cy.get(`input[id="calcField${i}"]`).type(1);
-    }
+    bundleCalculatorPage.inputFields(10, "1");
 
     // Click the "Calculate" button
-    cy.get(searchContainsId("calculateButton")).click();
-
+    bundleCalculatorPage.clickCalculateButton();
     // Verify the output
-    cy.get(searchContainsId("totalMinutes")).should("contain", "50598");
-    cy.get(searchContainsId("totalHours")).should("contain", "843.30");
-    cy.get(searchContainsId("totalDays")).should("contain", "35.14");
+    bundleCalculatorPage.verifyOutput("50598", "843.30", "35.14");
 
     // Click the "Clear" button
-    cy.get(searchContainsId("clearButton")).click();
-
+    bundleCalculatorPage.clickClearButton();
     // Verify the input fields are cleared
-    for (let i = 0; i <= 9; i++) {
-      cy.get(searchContainsId(`calcField${i}`)).should("have.value", "");
-    }
+    bundleCalculatorPage.verifyInputFieldsAreCleared(10);
 
-    cy.get(searchContainsId("totalMinutes")).should("contain", "0");
-    cy.get(searchContainsId("totalHours")).should("contain", "0");
-    cy.get(searchContainsId("totalDays")).should("contain", "0");
+    bundleCalculatorPage.verifyOutput("0", "0", "0");
   });
 });

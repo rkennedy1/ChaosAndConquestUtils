@@ -1,7 +1,9 @@
 import Calculator from "../../../src/components/Calculators/Calculator";
+import CalculatorPage from "../../models/Calculators/CalculatorPage";
 
 describe("<Calculator />", () => {
   it("renders", () => {
+    const calculatorPage = new CalculatorPage();
     cy.mount(
       <Calculator
         intervals={[
@@ -21,11 +23,9 @@ describe("<Calculator />", () => {
       />
     );
 
-    for (let i = 0; i <= 9; i++) {
-      cy.get(`input[id="calcField${i}"]`).should("exist");
-    }
+    calculatorPage.verifyInputFieldsExist(9);
 
-    cy.get("#calculateButton").should("exist");
-    cy.get("#clearButton").should("exist");
+    calculatorPage.verifyCalculateButtonExists();
+    calculatorPage.verifyClearButtonExists();
   });
 });

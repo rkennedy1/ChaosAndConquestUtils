@@ -1,29 +1,27 @@
 import React from "react";
 import TroopCalculator from "../../../src/components/Calculators/TroopCalculator";
 import { searchById } from "../../support/utils";
+import TroopCalculatorPage from "../../models/Calculators/TroopCalculatorPage";
 
 describe("<TroopCalculator />", () => {
   it("renders", () => {
-    // see: https://on.cypress.io/mounting-react
+    const troopCalculatorPage = new TroopCalculatorPage();
     cy.mount(<TroopCalculator />);
 
-    for (let i = 0; i <= 4; i++) {
-      cy.get(`input[id="calcField${i}"]`).type(1);
-    }
+    troopCalculatorPage.inputFields(5, "1");
+    troopCalculatorPage.clickCalculateButton();
 
-    cy.get("#calculateButton").click();
-    cy.get(searchById("totalPower")).contains("Total Power: 249");
+    troopCalculatorPage.verifyTotalPower("249");
+    troopCalculatorPage.verifyPowerTiers([
+      "Tier 1: 4",
+      "Tier 2: 10",
+      "Tier 3: 25",
+      "Tier 4: 60",
+      "Tier 5: 150",
+    ]);
 
-    cy.get(searchById(`totalPower0`)).contains("Tier 1: 4");
-    cy.get(searchById(`totalPower1`)).contains("Tier 2: 10");
-    cy.get(searchById(`totalPower2`)).contains("Tier 3: 25");
-    cy.get(searchById(`totalPower3`)).contains("Tier 4: 60");
-    cy.get(searchById(`totalPower4`)).contains("Tier 5: 150");
-
-    cy.get("#clearButton").click();
-    cy.get(searchById("totalPower")).contains("Total Power: 0");
-    for (let i = 0; i <= 4; i++) {
-      cy.get(`input[id="calcField${i}"]`).should("have.value", "0");
-    }
+    troopCalculatorPage.clickClearButton();
+    troopCalculatorPage.verifyTotalPower("0");
+    troopCalculatorPage.verifyInputFieldsAreCleared(5);
   });
 });
