@@ -1,5 +1,5 @@
 // Calculator.tsx
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Grid, TextField, Button, Box } from "@mui/material";
 
 type CalculatorProps = {

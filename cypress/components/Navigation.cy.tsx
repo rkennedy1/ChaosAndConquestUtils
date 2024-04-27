@@ -1,5 +1,5 @@
+import React from "react";
 import Navigation from "../../src/components/Navigation";
-import { searchById } from "../support/utils";
 import NavigationPage from "../models/NavigationPage";
 
 describe("<Navigation />", () => {
