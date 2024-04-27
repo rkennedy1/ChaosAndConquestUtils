@@ -43,7 +43,7 @@ const Calculator = ({
   return (
     <Grid container spacing={2} id="calculator">
       {intervals.map((interval, index) => (
-        <Grid item xs={6} sm={4} md={3} key={index}>
+        <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
           <TextField
             fullWidth
             label={interval.label}
@@ -62,7 +62,7 @@ const Calculator = ({
           />
         </Grid>
       ))}
-      <Grid item xs={6} sm={4} md={3}>
+      <Grid item xs={6} sm={4} md={3} lg={2}>
         <Box width={1} height={1}>
           <Button
             variant="contained"
@@ -74,7 +74,7 @@ const Calculator = ({
           </Button>
         </Box>
       </Grid>
-      <Grid item xs={6} sm={4} md={3}>
+      <Grid item xs={6} sm={4} md={3} lg={2}>
         <Box width={1} height={1}>
           <Button
             variant="contained"
